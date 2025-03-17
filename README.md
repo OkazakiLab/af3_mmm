@@ -1,5 +1,10 @@
 ![header](docs/header.jpg)
 
+# AF3_MMM
+
+AlphaFold 3 with modifiable max MSA to which we added an option (`--max_msa`) to modify the maximum number of MSA sequences.
+
+
 # AlphaFold 3
 
 This package provides an implementation of the inference pipeline of AlphaFold
