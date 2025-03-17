@@ -41,6 +41,7 @@ def featurise_input(
     buckets: Sequence[int] | None,
     ref_max_modified_date: datetime.date | None = None,
     conformer_max_iterations: int | None = None,
+    max_msa: int = 16384,
     verbose: bool = False,
 ) -> Sequence[features.BatchDict]:
   """Featurise the folding input.
@@ -68,13 +69,20 @@ def featurise_input(
   validate_fold_input(fold_input)
 
   # Set up data pipeline for single use.
-  data_pipeline = pipeline.WholePdbPipeline(
-      config=pipeline.WholePdbPipeline.Config(
-          buckets=buckets,
-          ref_max_modified_date=ref_max_modified_date,
-          conformer_max_iterations=conformer_max_iterations,
-      ),
+  #data_pipeline = pipeline.WholePdbPipeline(
+  #    config=pipeline.WholePdbPipeline.Config(
+  #        buckets=buckets,
+  #        ref_max_modified_date=ref_max_modified_date,
+  #        conformer_max_iterations=conformer_max_iterations,
+  #    ),
+  #)
+  config=pipeline.WholePdbPipeline.Config(
+      buckets=buckets,
+      ref_max_modified_date=ref_max_modified_date,
+      conformer_max_iterations=conformer_max_iterations,
   )
+  config.msa_crop_size = max_msa
+  data_pipeline = pipeline.WholePdbPipeline(config=config)
 
   batches = []
   for rng_seed in fold_input.rng_seeds:

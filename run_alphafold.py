@@ -282,6 +282,14 @@ _FORCE_OUTPUT_DIR = flags.DEFINE_bool(
     ' the inference separately, but use the same output directory.',
 )
 
+# Maximum number of MSA sequences
+_MAX_MSA = flags.DEFINE_integer(
+    'max_msa',
+    16384,
+    'Maximum number of MSA size (default: 16384).',
+    lower_bound=1,
+)
+
 
 def make_model_config(
     *,
@@ -408,6 +416,7 @@ def predict_structure(
   print(f'Featurising data with {len(fold_input.rng_seeds)} seed(s)...')
   featurisation_start_time = time.time()
   ccd = chemical_components.cached_ccd(user_ccd=fold_input.user_ccd)
+  max_msa = _MAX_MSA.value
   featurised_examples = featurisation.featurise_input(
       fold_input=fold_input,
       buckets=buckets,
@@ -415,6 +424,7 @@ def predict_structure(
       verbose=True,
       ref_max_modified_date=ref_max_modified_date,
       conformer_max_iterations=conformer_max_iterations,
+      max_msa=max_msa,
   )
   print(
       f'Featurising data with {len(fold_input.rng_seeds)} seed(s) took'

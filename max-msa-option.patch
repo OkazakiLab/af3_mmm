@@ -1,0 +1,74 @@
+diff --git a/run_alphafold.py b/run_alphafold.py
+index f49a757..b6b494d 100644
+--- a/run_alphafold.py
++++ b/run_alphafold.py
+@@ -282,6 +282,14 @@ _FORCE_OUTPUT_DIR = flags.DEFINE_bool(
+     ' the inference separately, but use the same output directory.',
+ )
+ 
++# Maximum number of MSA sequences
++_MAX_MSA = flags.DEFINE_integer(
++    'max_msa',
++    16384,
++    'Maximum number of MSA size (default: 16384).',
++    lower_bound=1,
++)
++
+ 
+ def make_model_config(
+     *,
+@@ -408,6 +416,7 @@ def predict_structure(
+   print(f'Featurising data with {len(fold_input.rng_seeds)} seed(s)...')
+   featurisation_start_time = time.time()
+   ccd = chemical_components.cached_ccd(user_ccd=fold_input.user_ccd)
++  max_msa = _MAX_MSA.value
+   featurised_examples = featurisation.featurise_input(
+       fold_input=fold_input,
+       buckets=buckets,
+@@ -415,6 +424,7 @@ def predict_structure(
+       verbose=True,
+       ref_max_modified_date=ref_max_modified_date,
+       conformer_max_iterations=conformer_max_iterations,
++      max_msa=max_msa,
+   )
+   print(
+       f'Featurising data with {len(fold_input.rng_seeds)} seed(s) took'
+diff --git a/src/alphafold3/data/featurisation.py b/src/alphafold3/data/featurisation.py
+index bdbbb3c..d014307 100644
+--- a/src/alphafold3/data/featurisation.py
++++ b/src/alphafold3/data/featurisation.py
+@@ -41,6 +41,7 @@ def featurise_input(
+     buckets: Sequence[int] | None,
+     ref_max_modified_date: datetime.date | None = None,
+     conformer_max_iterations: int | None = None,
++    max_msa: int = 16384,
+     verbose: bool = False,
+ ) -> Sequence[features.BatchDict]:
+   """Featurise the folding input.
+@@ -68,13 +69,20 @@ def featurise_input(
+   validate_fold_input(fold_input)
+ 
+   # Set up data pipeline for single use.
+-  data_pipeline = pipeline.WholePdbPipeline(
+-      config=pipeline.WholePdbPipeline.Config(
+-          buckets=buckets,
+-          ref_max_modified_date=ref_max_modified_date,
+-          conformer_max_iterations=conformer_max_iterations,
+-      ),
++  #data_pipeline = pipeline.WholePdbPipeline(
++  #    config=pipeline.WholePdbPipeline.Config(
++  #        buckets=buckets,
++  #        ref_max_modified_date=ref_max_modified_date,
++  #        conformer_max_iterations=conformer_max_iterations,
++  #    ),
++  #)
++  config=pipeline.WholePdbPipeline.Config(
++      buckets=buckets,
++      ref_max_modified_date=ref_max_modified_date,
++      conformer_max_iterations=conformer_max_iterations,
+   )
++  config.msa_crop_size = max_msa
++  data_pipeline = pipeline.WholePdbPipeline(config=config)
+ 
+   batches = []
+   for rng_seed in fold_input.rng_seeds:
