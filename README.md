@@ -2,8 +2,9 @@
 
 # AF3_MMM
 
-AlphaFold 3 with modifiable max MSA to which we added an option (`--max_msa`) to modify the maximum number of MSA sequences.
+AlphaFold 3 with Modifiable Max MSA (AF3_MMM). We added an option (`--max_msa`) to the original AF3 to modify the maximum number of MSA sequences.
 
+The following is the README of the original AF3, to which we have appended information about its options and how to use it in Research Center for Computational Science, Okazaki, Japan (highlighted in red).
 
 # AlphaFold 3
 
@@ -41,6 +42,10 @@ directly from Google. Use is subject to these
 ## Installation and Running Your First Prediction
 
 See the [installation documentation](docs/installation.md).
+
+<span style="color: red">For installation on RCCS, see the following page.</span>  
+https://ccportal.ims.ac.jp/en/node/3768  
+<span style="color: red">In addition to the packages listed in the installation procedure on this page, you will also need to install zlib using conda, etc.</span>
 
 Once you have installed AlphaFold 3, you can test your setup using e.g. the
 following input JSON file named `fold_input.json`:
@@ -87,6 +92,10 @@ control which parts AlphaFold 3 will run are:
     consuming and could be run on a machine without a GPU.
 *   `--run_inference` (defaults to `true`): whether to run the inference. This
     part requires a GPU.
+
+<span style="color: red">The following flag allows to modify the maximum number of MSA sequences (i.e., MSA depth):</span>
+
+*   `--max_msa <int>`: Maximum number of MSA sequences. Default is 16384. (e.g. --max_msa 64)
 
 ## AlphaFold 3 Input
 
