@@ -2,7 +2,7 @@
 
 # AF3_MMM
 
-AlphaFold 3 with Modifiable Max MSA (AF3_MMM). We added an option (`--max_msa`) to the original AF3 to modify the maximum number of MSA sequences.
+AlphaFold 3 with Modifiable Max MSA (AF3_MMM). We added an option (`--max_msa`) to the original AF3 to modify the maximum number of MSA sequences. Refer to [max-msa-option.patch](./max-msa-option.patch) to see where changes were made in the source code.
 
 The following is the README of the original AF3, to which we have appended information about [the option](#max-msa-option) and how to [install](#install-on-rccs) and [run AF3_MMM](#run-on-rccs) on Research Center for Computational Science, Okazaki, Japan.
 
