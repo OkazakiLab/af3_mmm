@@ -1,0 +1,7 @@
+The data pipeline part (MSA) requires huge memory and the inference part requires GPU. AlphaFold3 jobs should be run in two steps on RCCS system. Please check the sample job in this directory. You can run the job by "sh run.sh".
+
+README           : this file
+af3-input.json   : sample json input file for AlphaFold3
+run.sh           : exec script
+run-msa.sh       : job for data pipeline
+run-inference.sh : job for inference
