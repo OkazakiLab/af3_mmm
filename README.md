@@ -4,7 +4,7 @@
 
 AlphaFold 3 with Modifiable Max MSA (AF3_MMM). We added an option (`--max_msa`) to the original AF3 to modify the maximum number of MSA sequences.
 
-The following is the README of the original AF3, to which we have appended information about [the option](#max-msa-option) and [how to install AF3_MMM on Research Center for Computational Science, Okazaki, Japan](#install-on-rccs).
+The following is the README of the original AF3, to which we have appended information about [the option](#max-msa-option) and how to [install](#install-on-rccs) and [run AF3_MMM](#run-on-rccs) on Research Center for Computational Science, Okazaki, Japan.
 
 # AlphaFold 3
 
@@ -39,17 +39,20 @@ business days. You may only use AlphaFold 3 model parameters if received
 directly from Google. Use is subject to these
 [terms of use](https://github.com/google-deepmind/alphafold3/blob/main/WEIGHTS_TERMS_OF_USE.md).
 
-## Installation and Running Your First Prediction
+## Installation
 
 See the [installation documentation](docs/installation.md).
 
 <a name="install-on-rccs"></a>
-For installation on RCCS, see the following page.  
+### For RCCS users
+See the following page.  
 https://ccportal.ims.ac.jp/en/node/3768  
 
 **Note:**
 - In addition to the packages listed in the installation procedure for RCCS, you will also need to install zlib using conda, etc.
 - Because you can use hmmer and databases existing in RCCS, re-installing them is unnecessary. All you have to do is to install AF3 according to the procedure described in “python env (conda+pip)+alphafold3". 
+
+## Running Your First Prediction
 
 Once you have installed AlphaFold 3, you can test your setup using e.g. the
 following input JSON file named `fold_input.json`:
@@ -84,7 +87,8 @@ docker run -it \
     python run_alphafold.py \
     --json_path=/root/af_input/fold_input.json \
     --model_dir=/root/models \
-    --output_dir=/root/af_output
+    --output_dir=/root/af_output　\
+    --max_msa 64
 ```
 
 There are various flags that you can pass to the `run_alphafold.py` command, to
@@ -101,6 +105,11 @@ control which parts AlphaFold 3 will run are:
 The following flag allows to modify the maximum number of MSA sequences (i.e., MSA depth):
 
 *   `--max_msa <int>`: Maximum number of MSA sequences. Default is 16384. (e.g. --max_msa 64)
+
+<a name="run-on-rccs"></a>
+### For RCCS users
+See [run-af-301-mmm.sh](rccs/run-af-301-mmm.sh), [run-inference.sh](rccs/samples/run-inference.sh) and the following page.  
+https://ccportal.ims.ac.jp/en/node/3768  
 
 ## AlphaFold 3 Input
 
