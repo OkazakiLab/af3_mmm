@@ -46,7 +46,10 @@ See the [installation documentation](docs/installation.md).
 <a name="install-on-rccs"></a>
 For installation on RCCS, see the following page.  
 https://ccportal.ims.ac.jp/en/node/3768  
-In addition to the packages listed in the installation procedure on this page, you will also need to install zlib using conda, etc.
+
+**Note:**
+- In addition to the packages listed in the installation procedure for RCCS, you will also need to install zlib using conda, etc.
+- Because you can use hmmer and databases existing in RCCS, re-installing them is unnecessary. All you have to do is to install AF3 according to the procedure described in “python env (conda+pip)+alphafold3". 
 
 Once you have installed AlphaFold 3, you can test your setup using e.g. the
 following input JSON file named `fold_input.json`:
