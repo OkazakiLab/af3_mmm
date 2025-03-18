@@ -143,7 +143,7 @@ docker run -it \
     --json_path=/root/af_input/fold_input.json \
     --model_dir=/root/models \
     --output_dir=/root/af_output　\
-    --max_msa 64
+    --max_msa=64
 ```
 
 There are various flags that you can pass to the `run_alphafold.py` command, to
@@ -159,7 +159,7 @@ control which parts AlphaFold 3 will run are:
 <a name="max-msa-option"></a>
 The following flag allows to modify the maximum number of MSA sequences (i.e., MSA depth):
 
-*   `--max_msa <int>`: Maximum number of MSA sequences. Default is 16384. (e.g. --max_msa 64)
+*   `--max_msa=<int>`: Maximum number of MSA sequences. Default is 16384. (e.g. --max_msa 64)
 
 <a name="run-on-rccs"></a>
 ### For RCCS users
