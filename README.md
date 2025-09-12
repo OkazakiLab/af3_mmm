@@ -90,7 +90,7 @@ $ conda install -c nvidia absl-py=2.1.0 \
                           typeguard=2.13.3 \
                           typing-extensions=4.12.2 \
                           zstandard=0.23.0 \
-                          cuda \
+                          cuda=12.9 \
                           zlib
 $ pip install jax[cuda12]==0.4.34 \
               jaxlib==0.4.34 \
