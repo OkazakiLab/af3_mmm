@@ -4,7 +4,7 @@
 
 AlphaFold 3 with Modifiable Max MSA (AF3_MMM). We added an option (`--max_msa`) to the original AlphaFold 3.0.1 (latest code on Mar 17, 2025; commit id: 8151373) to modify the maximum number of MSA sequences. Refer to [`max-msa-option.patch`](./max-msa-option.patch) to see where changes were made in the source code.
 
-The following is the README of the original AF3, to which we have appended information about [the option](#max-msa-option) and how to [install](#install-on-rccs) and [run AF3_MMM](#run-on-rccs) on Research Center for Computational Science, Okazaki, Japan.
+The following is the README of the original AF3, to which we have appended information about [the added option](#max-msa-option).
 
 # AlphaFold 3
 
@@ -42,70 +42,6 @@ directly from Google. Use is subject to these
 ## Installation
 
 See the [installation documentation](docs/installation.md).
-
-<a name="install-on-rccs"></a>
-### For RCCS users
-See the following page.  
-https://ccportal.ims.ac.jp/en/node/3768  
-
-**Note:**
-- In addition to the packages listed in the installation procedure for RCCS, you will also need to install zlib using conda, etc.
-- Because you can use hmmer and databases existing in RCCS, re-installing them is unnecessary. All you have to do is to install AF3 according to the procedure described in “python env (conda+pip)+alphafold3". 
-
-For example,
-```
-$ mkdir -p ~/apl/alphafold
-$ sh Miniforge3-Linux-x86_64.sh
-...
-[.....] >>> /home/users/xxx/apl/alphafold/miniforge-3.0.1-mmm
-...
-$ cd ~/apl/alphafold
-$ ~/apl/alphafold/miniforge-3.0.1-mmm/bin/conda shell.bash hook > af301-mmm_init.sh
-$ ~/apl/alphafold/miniforge-3.0.1-mmm/bin/conda shell.csh hook > af301-mmm_init.csh
-$ vi af301-mmm_init.sh
-# Add the following line at the end
-export PATH="/apl/alphafold/hmmer-3.4/bin:$PATH"
-$ vi af301-mmm_init.csh
-# Add the following line at the end
-setenv PATH "/apl/alphafold/hmmer-3.4/bin:$PATH"
-$ . af301-mmm_init.sh
-$ conda create -n af3-mmm python=3.11
-$ conda activate af3-mmm
-$ sed -i -e "s/base/af3-mmm/" af301-mmm_init.sh af301-mmm_init.csh
-$ conda install -c nvidia absl-py=2.1.0 \
-                          chex=0.1.87 \
-                          dm-tree=0.1.8 \
-                          filelock=3.16.1 \
-                          jaxtyping=0.2.34 \
-                          jmp=0.0.4 \
-                          ml_dtypes=0.5.0 \
-                          numpy=2.1.3 \
-                          opt_einsum=3.4.0 \
-                          pillow=11.0.0 \
-                          rdkit=2024.03.5 \
-                          scipy=1.14.1 \
-                          tabulate=0.9.0 \
-                          toolz=1.0.0 \
-                          tqdm=4.67.0 \
-                          typeguard=2.13.3 \
-                          typing-extensions=4.12.2 \
-                          zstandard=0.23.0 \
-                          cuda=12.9 \
-                          zlib
-$ pip install jax[cuda12]==0.4.34 \
-              jaxlib==0.4.34 \
-              jmp==0.0.4 \
-              chex==0.1.87 \
-              opt-einsum==3.4.0 \
-              dm-haiku==0.0.13 \
-              triton==3.1.0 \
-              jax-triton==0.2.0
-# af3_mmm is assumed to be located at ~/temp/
-$ cp -r ~/temp/af3_mmm ~/apl/alphafold/3.0.1-mmm
-$ cd ~/apl/alphafold/3.0.1-mmm
-$ pip install --no-deps .
-$ build_data
-```
 
 ## Running Your First Prediction
 
@@ -160,10 +96,6 @@ control which parts AlphaFold 3 will run are:
 The following flag allows to modify the maximum number of MSA sequences (i.e., MSA depth):
 
 *   `--max_msa=<int>`: Maximum number of MSA sequences. Default is 16384. (e.g. --max_msa=64)
-
-<a name="run-on-rccs"></a>
-### For RCCS users
-See [`rccs/samples`](rccs/samples). The `--max_msa` flag is specified in the `run-inference.sh`. 
 
 ## AlphaFold 3 Input
 
