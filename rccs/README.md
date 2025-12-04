@@ -70,4 +70,4 @@ $ build_data
 ## Running Your First Prediction
 
 <a name="run-on-rccs"></a>
-To run your prediction, see [`samples`](rccs/samples). The `--max_msa` flag is specified in the `run-inference.sh`. 
+To run your prediction, see [`samples`](samples). The `--max_msa` flag is specified in the `run-inference.sh`. 
