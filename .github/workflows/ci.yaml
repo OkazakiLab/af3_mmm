@@ -18,7 +18,7 @@ jobs:
       matrix:
         include:
           - name-prefix: "all tests"
-            python-version: '3.11'
+            python-version: '3.11.14'
             os: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -32,7 +32,13 @@ jobs:
         pip install --upgrade pip
         pip install -r dev-requirements.txt
         pip install --no-deps .
-        build_data
+    - name: Copy prebuilt chemical_component_sets.pickle
+      run: |
+        cp .github/workflows/chemical_component_sets.pickle /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/
     - name: Run CPU-only tests
       run: |
         python run_alphafold_data_test.py
+    - name: Cleanup pickle file
+      if: always()
+      run: |
+        rm -f /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/chemical_component_sets.pickle
