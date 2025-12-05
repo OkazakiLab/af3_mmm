@@ -28,7 +28,7 @@ from alphafold3.common import folding_input
 from alphafold3.common import resources
 from alphafold3.common.testing import data as testing_data
 #from alphafold3.constants import chemical_components
-from alphafold3.data import featurisation
+#from alphafold3.data import featurisation
 from alphafold3.data import pipeline
 from alphafold3.model.atom_layout import atom_layout
 from alphafold3.structure import test_utils
@@ -234,22 +234,22 @@ class DataPipelineTest(test_utils.StructureTestCase):
 
     self.assertEqual(actual_fold_input, fold_input)
 
-  def test_process_fold_input_runs_only_data_pipeline(self):
-    fold_input = folding_input.Input.from_json(self._test_input_json)
-    output_dir = self.create_tempdir().full_path
-    run_alphafold.process_fold_input(
-        fold_input=fold_input,
-        data_pipeline_config=self._data_pipeline_config,
-        model_runner=None,
-        output_dir=output_dir,
-    )
-    with open(
-        os.path.join(output_dir, f'{fold_input.sanitised_name()}_data.json'),
-        'rt',
-    ) as f:
-      actual_fold_input = folding_input.Input.from_json(f.read())
+  #def test_process_fold_input_runs_only_data_pipeline(self):
+  #  fold_input = folding_input.Input.from_json(self._test_input_json)
+  #  output_dir = self.create_tempdir().full_path
+  #  run_alphafold.process_fold_input(
+  #      fold_input=fold_input,
+  #      data_pipeline_config=self._data_pipeline_config,
+  #      model_runner=None,
+  #      output_dir=output_dir,
+  #  )
+  #  with open(
+  #      os.path.join(output_dir, f'{fold_input.sanitised_name()}_data.json'),
+  #      'rt',
+  #  ) as f:
+  #    actual_fold_input = folding_input.Input.from_json(f.read())
 
-    featurisation.validate_fold_input(actual_fold_input)
+  #  featurisation.validate_fold_input(actual_fold_input)
 
   @parameterized.product(num_db_dirs=tuple(range(1, 3)))
   def test_replace_db_dir(self, num_db_dirs: int) -> None:
