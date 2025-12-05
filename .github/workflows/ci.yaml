@@ -12,6 +12,7 @@ on:
 
 jobs:
   build:
+    timeout-minutes: 120
     name: "build ${{ matrix.name-prefix }} (py ${{ matrix.python-version }} on ${{ matrix.os }})"
     runs-on: ${{ matrix.os }}
     strategy:
@@ -27,6 +28,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
+      timeout-minutes: 90
       run: |
         sudo apt-get install -y hmmer
         pip install --upgrade pip
