@@ -34,7 +34,7 @@ jobs:
         pip install --no-deps .
     - name: Copy prebuilt chemical_component_sets.pickle
       run: |
-        cp chemical_component_sets.pickle src/alphafold3/constants/converters/
+        cp .github/workflows/chemical_component_sets.pickle src/alphafold3/constants/converters/
     - name: Run CPU-only tests
       run: |
         python run_alphafold_data_test.py
