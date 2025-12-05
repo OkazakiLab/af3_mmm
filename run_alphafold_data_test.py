@@ -39,6 +39,8 @@ import run_alphafold
 import shutil
 
 
+SKIP_HEAVY = os.environ.get("AF3_CI_SKIP_HEAVY") == "1"
+
 _JACKHMMER_BINARY_PATH = shutil.which('jackhmmer')
 _NHMMER_BINARY_PATH = shutil.which('nhmmer')
 _HMMALIGN_BINARY_PATH = shutil.which('hmmalign')
@@ -96,7 +98,6 @@ def _generate_diff(actual: str, expected: str) -> str:
           lineterm='',
       )
   )
-
 
 class DataPipelineTest(test_utils.StructureTestCase):
   """Test AlphaFold 3 inference."""
@@ -200,6 +201,8 @@ class DataPipelineTest(test_utils.StructureTestCase):
     self.compare_golden(result_path)
 
   def test_featurisation(self):
+    if SKIP_HEAVY:
+      self.skipTest("Skipping heavy featurisation test in CI")
     """Run featurisation and assert that the output is as expected."""
     fold_input = folding_input.Input.from_json(self._test_input_json)
     data_pipeline = pipeline.DataPipeline(self._data_pipeline_config)
