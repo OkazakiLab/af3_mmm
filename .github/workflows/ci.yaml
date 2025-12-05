@@ -32,6 +32,13 @@ jobs:
         pip install --upgrade pip
         pip install -r dev-requirements.txt
         pip install --no-deps .
+    - name: Copy prebuilt chemical_component_sets.pickle
+      run: |
+        cp chemical_component_sets.pickle src/alphafold3/constants/converters/
     - name: Run CPU-only tests
       run: |
         python run_alphafold_data_test.py
+    - name: Cleanup pickle file
+      if: always()
+      run: |
+        rm -f src/alphafold3/constants/converters/chemical_component_sets.pickle
