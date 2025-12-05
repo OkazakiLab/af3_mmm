@@ -35,10 +35,12 @@ jobs:
     - name: Copy prebuilt chemical_component_sets.pickle
       run: |
         cp .github/workflows/chemical_component_sets.pickle /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/
+        cp .github/workflows/ccd.pickle.gz /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/
+        gunzip /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/ccd.pickle.gz
     - name: Run CPU-only tests
       run: |
         python run_alphafold_data_test.py
     - name: Cleanup pickle file
       if: always()
       run: |
-        rm -f /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/chemical_component_sets.pickle
+        rm -f /opt/hostedtoolcache/Python/3.11.14/x64/lib/python3.11/site-packages/alphafold3/constants/converters/*.pickle
