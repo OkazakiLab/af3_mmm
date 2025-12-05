@@ -34,6 +34,12 @@ jobs:
         pip install --upgrade pip
         pip install -r dev-requirements.txt
         pip install --no-deps .
+    - name: Generate required lightweight pickle
+      run: |
+        python - << 'EOF'
+        from alphafold3.constants.converters import chemical_component_sets
+        chemical_component_sets.main()
+        EOF
     - name: Run CPU-only tests
       run: |
         python run_alphafold_data_test.py
