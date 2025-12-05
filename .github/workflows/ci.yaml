@@ -32,7 +32,6 @@ jobs:
         pip install --upgrade pip
         pip install -r dev-requirements.txt
         pip install --no-deps .
-        build_data
     - name: Run CPU-only tests
       run: |
         python run_alphafold_data_test.py
