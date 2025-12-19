@@ -93,7 +93,7 @@ control which parts AlphaFold 3 will run are:
     part requires a GPU.
 
 <a name="max-msa-option"></a>
-The following flag allows to modify the maximum number of MSA sequences (i.e., MSA depth):
+The following flag allows users to modify the maximum number of MSA sequences (i.e., MSA depth):
 
 *   `--max_msa=<int>`: Maximum number of MSA sequences. Default is 16384. (e.g. --max_msa=64)
 
@@ -123,6 +123,20 @@ if it is not already listed in [Known Issues](docs/known_issues.md) or in the
 
 Any publication that discloses findings arising from using this source code, the
 model parameters or outputs produced by those should cite:
+
+```bibtex
+@article {Ohnuki2025,
+	author = {Ohnuki, Jun and Okazaki, Kei-ichi},
+	title = {Enhanced sampling of protein conformations in AlphaFold3 with repulsive bias in the diffusion generative model},
+	elocation-id = {2025.12.17.693105},
+	year = {2025},
+	doi = {10.64898/2025.12.17.693105},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2025/12/18/2025.12.17.693105},
+	eprint = {https://www.biorxiv.org/content/early/2025/12/18/2025.12.17.693105.full.pdf},
+	journal = {bioRxiv}
+}
+```
 
 ```bibtex
 @article{Abramson2024,

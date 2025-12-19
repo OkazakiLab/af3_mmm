@@ -9,8 +9,8 @@ See the following page.
 https://ccportal.ims.ac.jp/en/node/3768  
 
 **Note:**
-- In addition to the packages listed in the installation procedure for RCCS, you will also need to install zlib using conda, etc.
-- Because you can use hmmer and databases existing in RCCS, re-installing them is unnecessary. All you have to do is to install AF3 according to the procedure described in “python env (conda+pip)+alphafold3". 
+- In addition to the packages listed in the installation procedure for RCCS, you may also need to install zlib using conda, etc.
+- Because you can use hmmer and databases existing in RCCS, re-installing them is unnecessary. All you have to do is install AF3 according to the procedure described in “python env (conda+pip)+alphafold3". 
 
 For example,
 ```
