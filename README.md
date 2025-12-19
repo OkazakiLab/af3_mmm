@@ -1,6 +1,7 @@
 ![header](docs/header.jpg)
 
 # AF3_MMM
+[![DOI](https://zenodo.org/badge/949924513.svg)](https://doi.org/10.5281/zenodo.17985631)
 
 AlphaFold 3 with Modifiable Max MSA (AF3_MMM). We added an option (`--max_msa`) to the original AlphaFold 3.0.1 (latest code on Mar 17, 2025; commit id: 8151373) to modify the maximum number of MSA sequences. Refer to [`max-msa-option.patch`](./max-msa-option.patch) to see where changes were made in the source code.
 
